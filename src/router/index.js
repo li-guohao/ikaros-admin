@@ -1,14 +1,23 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../component/Home.vue'
+import NotFound from '@/component/NotFound.vue' //404 Not Found
+import Home from '@/component/Home.vue' // Home
+import Login from '@/component/Login.vue' //登录
 
 Vue.use(VueRouter)
 
 const routes = [
   {
+    path: '*',
+    component: NotFound
+  },
+  {
     path: '/',
-    name: 'Home',
     component: Home
+  },
+  {
+    path: '/login',
+    component: Login
   },
 ]
 

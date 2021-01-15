@@ -1,9 +1,9 @@
 <template>
   <div class="root">
     <el-container>
-      <el-aside :width="isCollapse ? '0' : '300px'">
+      <el-aside :width="isCollapse ? '0' : '300px'" >
         <div class="font-logo">
-          Aside
+          Ikaros-Admin
         </div>
         <!-- 下拉导航栏 -->
         <el-menu :default-openeds="['1', '3']">
@@ -71,7 +71,7 @@
         
         <el-header>
           <el-button  icon="el-icon-menu" round @click="isCollapse=!isCollapse"></el-button>
-          Header
+          <font>尊敬的：<!-- {{user.nickname}} --> 欢迎您访问后台管理界面</font>
         </el-header>
 
         <el-main>
@@ -91,7 +91,7 @@
 export default {
    data() {
     return {
-      // 是否折叠
+      // 是否折叠，默认折叠
       isCollapse: true,
     }
   },
