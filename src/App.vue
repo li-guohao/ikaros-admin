@@ -5,6 +5,7 @@
         <div class="font-logo">
           Aside
         </div>
+        <!-- 下拉导航栏 -->
         <el-menu :default-openeds="['1', '3']">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-message"></i>导航一</template>
