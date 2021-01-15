@@ -1,66 +1,160 @@
 <template>
   <div class="root">
-    <router-view/>
-    <!-- 尾部声明 -->
-    <!-- 
-      Ikaros CMS Web System ©2021 Created by <a href="https://liguohao.cn" target="_blank">liguohao</a>
-    -->
+    <el-container>
+      <el-aside :width="isCollapse ? '0' : '300px'">
+        <div class="font-logo">
+          Aside
+        </div>
+        <el-menu :default-openeds="['1', '3']">
+          <el-submenu index="1">
+            <template slot="title"><i class="el-icon-message"></i>导航一</template>
+            <el-menu-item-group>
+              <template slot="title">分组一</template>
+              <el-menu-item index="1-1">选项1</el-menu-item>
+              <el-menu-item index="1-2">选项2</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="分组2">
+              <el-menu-item index="1-3">选项3</el-menu-item>
+            </el-menu-item-group>
+            <el-submenu index="1-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="1-4-1">选项4-1</el-menu-item>
+            </el-submenu>
+          </el-submenu>
+          <el-submenu index="2">
+            <template slot="title"><i class="el-icon-menu"></i>导航二</template>
+            <el-menu-item-group>
+              <template slot="title">分组一</template>
+              <el-menu-item index="2-1">选项1</el-menu-item>
+              <el-menu-item index="2-2">选项2</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="分组2">
+              <el-menu-item index="2-3">选项3</el-menu-item>
+            </el-menu-item-group>
+            <el-submenu index="2-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="2-4-1">选项4-1</el-menu-item>
+            </el-submenu>
+          </el-submenu>
+          <el-submenu index="3">
+            <template slot="title"><i class="el-icon-setting"></i>导航三</template>
+            <el-menu-item-group>
+              <template slot="title">分组一</template>
+              <el-menu-item index="3-1">选项1</el-menu-item>
+              <el-menu-item index="3-2">选项2</el-menu-item>
+            </el-menu-item-group>
+            <el-menu-item-group title="分组2">
+              <el-menu-item index="3-3">选项3</el-menu-item>
+            </el-menu-item-group>
+            <el-submenu index="3-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+            </el-submenu>
+            <el-submenu index="3-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+            </el-submenu>
+            <el-submenu index="3-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+            </el-submenu>
+            <el-submenu index="3-4">
+              <template slot="title">选项4</template>
+              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+            </el-submenu>
+          </el-submenu>
+        </el-menu>
+      </el-aside>
+
+      <el-container>
+        
+        <el-header>
+          <el-button  icon="el-icon-menu" round @click="isCollapse=!isCollapse"></el-button>
+          Header
+        </el-header>
+
+        <el-main>
+          <router-view />
+        </el-main>
+
+        <el-footer>
+          Footer
+        </el-footer>
+      </el-container>
+    </el-container>
   </div>
 </template>
 
 <script>
 
 export default {
-   methods: {
-    onCollapse(collapsed, type) {
-      console.log(collapsed, type);
-    },
-    onBreakpoint(broken) {
-      console.log(broken);
-    },
+   data() {
+    return {
+      // 是否折叠
+      isCollapse: true,
+    }
   },
+  created() {
+   
+  },
+  methods: {
+    
+  }
 };
 </script>
 
 <style lang="less" scoped>
-// 覆盖默认a标签样式
-a{
-text-decoration:none;
-color: #268deede;
-}
-// 伊卡洛斯页面布局
-.ikaros-layout {
-  height: 100%;
 
-  // 头部区域
-  .ikaros-layout-header{
-    background-color: #fff;
-    padding: 0;
-  }
-
-  
-  // Ikaros Admin Logo
-  .ikaros-sider-logo{
-    color: #268deede;
-    line-height: 60px;
-    text-align: center;
-    font-size: 31px;
-    text-shadow: 1px 1px black,2px 2px black,
-                 3px 3px black,4px 4px black, 
-                 5px 5px black,6px 6px black, 
-                 7px 7px black,8px 8px black;
-  }
-
-  // 面包屑
-  .ikaros-layout-breadcrumb{
-    margin: 16px 0;
-    font-size: 20px;
-  }
-
-  // 主体内容区域
-  .ikaros-layout-content{
-    display: inline;
+.root{
+  // 整体容器
+  .el-container{
+    width: 100%;
     height: auto;
+
+    // 左边导航栏
+    .el-aside{
+      margin: 0;
+      padding: 0;
+      min-height: 980px;
+      height: auto;
+      background-color: rgb(238, 241, 246);
+
+      // 字体LOGO
+      .font-logo{
+        line-height: 60px;
+        font-size: 30px;
+        text-align: center;
+        background-color:   rgba(238, 241, 246, 0.76);
+      }
+      // 下拉菜单
+      .el-menu{
+        background-color: rgb(238, 241, 246);
+      }
+
+    }
+
+    // 头部导航栏 
+    .el-header{
+      padding: 0;
+      line-height: 50px;
+      background-color:  rgba(238, 241, 246, 0.76);
+      
+      // 按钮
+      .el-button{
+        background-color:  rgba(238, 241, 246, 0.76);
+      }
+    }
+
+    // 尾部声明
+    .el-footer{
+     text-align: center;
+     font-size: 20px; 
+     padding: 20px;
+    }
+    
+      
   }
+
 }
+
 </style>
