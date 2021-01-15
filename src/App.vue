@@ -72,6 +72,7 @@
         <el-header>
           <el-button  icon="el-icon-menu" round @click="isCollapse=!isCollapse"></el-button>
           <font>尊敬的：<!-- {{user.nickname}} --> 欢迎您访问后台管理界面</font>
+          <a href="/logout" style="float:right;margin: 0 5px;">登出</a>
         </el-header>
 
         <el-main>
@@ -105,6 +106,10 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// 更改a标签默认样式
+a{
+  text-decoration: none;
+}
 
 .root{
   // 整体容器
