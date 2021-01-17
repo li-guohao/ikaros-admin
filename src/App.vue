@@ -64,10 +64,6 @@
               <el-menu-item index="4-4">友情链接</el-menu-item>
               <el-menu-item index="4-5">首页导航</el-menu-item>
             </el-menu-item-group>
-            <el-menu-item-group title="三方登录">
-              <el-menu-item index="4-6">QQ登录</el-menu-item>
-              <el-menu-item index="4-7">微信登录</el-menu-item>
-            </el-menu-item-group>
           </el-submenu>
         </el-menu>
       </el-aside>
@@ -76,7 +72,7 @@
         
         <el-header>
           <el-button  icon="el-icon-menu" round @click="isCollapse=!isCollapse"></el-button>
-          <font>尊敬的：<!-- {{user.nickname}} --> 欢迎您访问后台管理界面</font>
+          <font>尊敬的：<!-- {{user.nickname}} --> 欢迎您访问伊卡洛斯后台管理界面</font>
           <a href="/logout" style="float:right;margin: 0 5px;">登出</a>
         </el-header>
 
