@@ -1,12 +1,12 @@
 <template>
-  <div class="root">
+  <div class="root" >
     <el-container>
       <el-aside :width="isCollapse ? '0' : '300px'" >
-        <div class="font-logo">
+        <div class="font-logo" @click="toComponents('/')">
           Ikaros-Admin
         </div>
         <!-- 下拉导航栏 -->
-        <el-menu :default-openeds="['1', '3']">
+        <el-menu :default-openeds="['1', '4']">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-document-copy"></i>个人记录</template>
             <el-submenu index="1-1">
@@ -60,9 +60,9 @@
               <el-menu-item index="4-2">账号绑定</el-menu-item>
             </el-menu-item-group>
             <el-menu-item-group title="系统配置">
-              <el-menu-item index="4-3">配置管理</el-menu-item>
-              <el-menu-item index="4-4">友情链接</el-menu-item>
-              <el-menu-item index="4-5">首页导航</el-menu-item>
+              <el-menu-item index="4-3" @click="toComponents('/system/option/config/manager')">配置管理</el-menu-item>
+              <el-menu-item index="4-4" @click="toComponents('/system/option/frined/links')">友情链接</el-menu-item>
+              <el-menu-item index="4-5" @click="toComponents('/system/option/index/nav')">首页导航</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -72,8 +72,9 @@
         
         <el-header>
           <el-button  icon="el-icon-menu" round @click="isCollapse=!isCollapse"></el-button>
-          <font>尊敬的：<!-- {{user.nickname}} --> 欢迎您访问伊卡洛斯后台管理界面</font>
-          <a href="/logout" style="float:right;margin: 0 5px;">登出</a>
+          <font>伊卡洛斯后台管理界面</font>
+          <!-- <a href="/logout" style="float:right;margin: 0 5px;">登出</a> -->
+          <el-button @click="toComponents('/logout')" style="float:right;line-height:30px;"  round >登出</el-button>
         </el-header>
 
         <el-main>
@@ -95,13 +96,32 @@ export default {
     return {
       // 是否折叠，默认折叠
       isCollapse: true,
+      // 当前路由路径
+      currentRouterPath: null,
     }
   },
   created() {
-   
+
   },
   methods: {
-    
+    // 路由导航 为了防止JS报错，只有当当前路由路径与目标路径不一致才进行路由跳转
+    toComponents(e){
+      var url = window.location.href                        // http://localhost:8080/logout
+      url = url.substring(url.indexOf('://')+3)             // localhost:8080/logout
+      const relativePath = url.substring(url.indexOf('/'))  // /logout
+      this.currentRouterPath = relativePath;
+      if(e != this.currentRouterPath) {                     // 判断目标路径和当前路径是否相同
+        console.log("router to ==> " + e)
+        this.currentRouterPath = e
+        this.$router.push(e)
+      }else{
+        this.$message.warning('已经在当前路径了 => '+window.location.href)
+      }
+    },
+    // 测试用事件
+    test(e){
+      console.log(e)
+    }
   }
 };
 </script>
@@ -133,9 +153,20 @@ a{
         text-align: center;
         background-color:   rgba(238, 241, 246, 0.76);
       }
+      .font-logo:hover,.font-logo:focus{
+        background-color:  rgba(88, 85, 85, 0.281);
+        color: rgb(240, 233, 233);
+        transition: all 0.8s ease-in-out; /* 缓慢变化效果 */
+        cursor: pointer;
+      }
+
       // 下拉菜单
       .el-menu{
         background-color: rgb(238, 241, 246);
+
+        a{
+          color: #303133;
+        }
       }
 
     }
