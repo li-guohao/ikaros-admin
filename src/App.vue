@@ -6,7 +6,7 @@
           Ikaros-Admin
         </div>
         <!-- 下拉导航栏 -->
-        <el-menu :default-openeds="['1', '4']">
+        <el-menu >
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-document-copy"></i>个人记录</template>
             <el-submenu index="1-1">
