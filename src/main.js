@@ -7,6 +7,21 @@ import store from './store'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+import axios from 'axios'
+// 配置请求的跟路径
+axios.defaults.baseURL = 'http://localhost:8888/'
+
+
+// http request 拦截器 作用是添加全局请求头
+// axios.interceptors.request.use(
+//   config => {  
+//     config.headers['Authorization'] =  window.sessionStorage.getItem('token');
+//     config.headers['UID'] = window.sessionStorage.getItem('UID');
+//     return config;
+//   })
+Vue.prototype.$http = axios
+
+// Vue 全局配置
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
