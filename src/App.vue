@@ -28,8 +28,8 @@
             </el-submenu>
             <el-submenu index="1-4">
               <template slot="title">视频生活</template>
-              <el-menu-item index="1-4-1">发布VLOG</el-menu-item>
-              <el-menu-item index="1-4-1">VLOG管理</el-menu-item>
+              <el-menu-item index="1-4-1">发布视频</el-menu-item>
+              <el-menu-item index="1-4-1">视频管理</el-menu-item>
             </el-submenu>
           </el-submenu>
           <el-submenu index="2">
