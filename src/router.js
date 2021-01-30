@@ -4,6 +4,7 @@ import NotFound from '@/component/NotFound.vue' //404 Not Found
 import Home from '@/component/Home.vue' // Home
 import Login from '@/component/Login.vue' //登录
 
+import DBFileManager from '@/component/data/center/DBFileManager.vue'   //文件管理
 import ConfigManager from '@/component/system/option/ConfigManager.vue' //配置管理
 
 Vue.use(VueRouter)
@@ -20,6 +21,10 @@ const routes = [
   {
     path: '/login',
     component: Login
+  },
+  {
+    path:'/data/center/dbfile/manager',
+    component: DBFileManager
   },
   {
     path: '/system/option/config/manager',
