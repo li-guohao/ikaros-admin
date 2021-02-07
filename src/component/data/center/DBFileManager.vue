@@ -12,9 +12,52 @@
     &nbsp;&nbsp;&nbsp;&nbsp;
     <el-input style="width:20%" @change="handleCurrentChange(1)" placeholder="文件名" v-model="searchDTOByPaging.original.originalName" clearable></el-input>
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <el-input style="width:65%" @change="handleCurrentChange(1)" placeholder="请输入文件路径模糊查询" v-model="searchDTOByPaging.original.webUrl" clearable></el-input>
+    <el-select @change="handleCurrentChange(1)" clearable  v-model="searchDTOByPaging.original.place" placeholder="请选择储存位置">
+        <el-option
+        v-for="place in dbFilePlaceArr"
+        :key="place.id"
+        :label="place.name"
+        :value="place.value">
+        </el-option>
+    </el-select>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <el-input style="width:45%" @change="handleCurrentChange(1)" placeholder="请输入文件路径模糊查询" v-model="searchDTOByPaging.original.webUrl" clearable></el-input>
+    <!-- 文件展示框 -->
+    <el-dialog
+        :title="fileEntity.originalName"
+        :visible.sync="fileInfoDialogVisible"
+        width="60%">
+    <div align="center">
+        <!-- 文件描述  -->
+        <p>{{fileEntity.description}}</p>
+        <!-- 图片文件 -->
+        <div v-if="imgSuffixArray.indexOf(fileEntity.suffix) >=0">
+            <a :href="fileEntity.webUrl" target="_blank">
+                <img :src="fileEntity.webUrl" :alt="fileEntity.description" width="100%" />
+            </a>
+        </div>
+        <!-- 视频文件 -->
+        <div v-else-if="videoSuffixArray.indexOf(fileEntity.suffix) >=0">
+            <video :src="fileEntity.webUrl" controls width="100%" preload="none" >
+                您的浏览器不支持HTML5的video标签
+            </video>
+        </div>
+        
+        <!-- 音频文件 -->
+        <div v-else-if="voiceSuffixArray.indexOf(fileEntity.suffix) >=0">
+            <audio :src="fileEntity.webUrl" controls="controls">
+            </audio>
+        </div>
+
+        <!-- 其它类型 -->
+        <div v-else>
+            <p>不支持预览的文件类型</p>
+        </div>
+    </div>
+    </el-dialog>
+    
     <!-- 数据区域 -->
-    <el-table stripe  @row-dblclick="deleteCurrentConfigItem"
+    <el-table stripe  @row-dblclick="showFile" @before-close="fileEntity = {}"
             :data="resultByPaging.data.dataArray"
             style="width: 100%">
     <!-- checkbox -->
@@ -42,12 +85,22 @@
     <!-- 更新时间 -->
     <el-table-column
         prop="uploadTime"
-        label="更新时间">
+        label="更新时间"
+        width="165px">
     </el-table-column>
     <!-- 描述 -->
     <el-table-column
         prop="description"
         label="描述">
+        <template slot-scope="scope">
+            <el-input 
+            autosize
+            type="textarea"
+            :rows="2"
+            placeholder="请输入此文件记录的描述"
+            v-model="scope.row.description" @blur="saveEntity(scope.row)">
+            </el-input>
+        </template>
     </el-table-column>
      <!-- 访问路径 -->
     <el-table-column
@@ -59,8 +112,8 @@
         label="操作"
         >
         <template slot-scope="scope">
-            <el-button>详情</el-button>
-            <el-button>删除</el-button>
+            <el-button @click="showFile(scope.row)">详情</el-button>
+            <el-button @click="deleteEntity(scope.row)">删除</el-button>
         </template>
     </el-table-column>
 
@@ -107,7 +160,24 @@ export default {
                 message:'',     //消息
                 detail:'',      //细节
             },
-
+            // 文件储存的所有位置
+            dbFilePlaceArr:[
+                {id:0,name:'本地',value:'local'},
+                {id:1,name:'阿里云OSS',value:'aliyun_oss'},
+                {id:2,name:'腾讯云COS',value:'tencent_cloud_cos'},
+            ],
+            // 文件展示框是否显示
+            fileInfoDialogVisible: false,
+            // 文件详情
+            fileEntity:{},
+            // 图片后缀
+            imgSuffixArray:["bmp","bpg","png","jpg","jpeg"],
+            // 视频后缀
+            videoSuffixArray:["mp4","mov","avi","flv","wmv","mkv"],
+            // 音频后缀
+            voiceSuffixArray:["mp3","flac"],
+            // 文档后缀
+            docSuffixArray:["pdf","doc","docx","ppt","txt","yaml","properties","yml","xml"],
         }
     },
     created(){
@@ -141,6 +211,44 @@ export default {
         handleCurrentChange(val){
             this.searchDTOByPaging.currentPage = val
             this.getListByPaging()
+        },
+        // 显示文件详情
+        showFile(dbFile){
+            // console.log(dbFile)
+            this.fileEntity = dbFile
+            this.fileInfoDialogVisible = true
+        },
+        // 文件展示框关闭之前的钩子事件
+        beforeFileInfoDialogClose(down){
+            console.log(down)
+        },
+        // 保存或更新
+        async saveEntity(dbfile){
+            const {data: res} = await this.$http.put(`/api/dbfile/one/save`,dbfile)
+            //console.log(res)
+            if(res.status.code !== 201) return this.$message.error('后台接口异常，保存或更新失败，返回信息：'+res.message)
+            else this.$message.success(res.message)
+            this.getListByPaging()
+        },
+        // 删除
+        async deleteEntity(dbfile){
+            // 再次确认
+            this.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+            }).then(async () => {
+                // 请求后台，删除文件
+                const {data:res} = await this.$http.delete(`/api/dbfile/one/`+dbfile.fileId)
+                if(res.status.code!=200) this.$message.error(res.message)
+                else this.$message.success(res.message)
+                this.getListByPaging()
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                });          
+            });
         },
     }
 }
