@@ -171,13 +171,14 @@ export default {
             // 文件详情
             fileEntity:{},
             // 图片后缀
-            imgSuffixArray:["bmp","bpg","png","jpg","jpeg"],
+            imgSuffixArray:["bmp","bpg","png","jpg","jpeg","gif"],
             // 视频后缀
             videoSuffixArray:["mp4","mov","avi","flv","wmv","mkv"],
             // 音频后缀
             voiceSuffixArray:["mp3","flac"],
             // 文档后缀
             docSuffixArray:["pdf","doc","docx","ppt","txt","yaml","properties","yml","xml"],
+            
         }
     },
     created(){

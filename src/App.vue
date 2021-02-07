@@ -36,7 +36,7 @@
             <template slot="title"><i class="el-icon-folder-opened"></i>数据中心</template>
             <el-menu-item-group>
               <template slot="title">文件管理</template>
-              <el-menu-item index="2-1" >上传文件</el-menu-item>
+              <el-menu-item index="2-1" @click="toComponents('/data/center/dbfile/upload')">上传文件</el-menu-item>
               <el-menu-item index="2-2" @click="toComponents('/data/center/dbfile/manager')">所有文件</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
