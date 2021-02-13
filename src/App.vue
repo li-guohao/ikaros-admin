@@ -16,8 +16,8 @@
             </el-submenu>
             <el-submenu index="1-2">
               <template slot="title">知识专栏</template>
-              <el-menu-item index="1-2-1" @click="toComponents('/personal/column/write')">撰写专栏</el-menu-item>
-              <el-menu-item index="1-2-2" @click="toComponents('/personal/column/manager')">专栏管理</el-menu-item>
+              <el-menu-item index="1-2-1" @click="toComponents('/personal/article/write')">撰写专栏</el-menu-item>
+              <el-menu-item index="1-2-2" @click="toComponents('/personal/article/manager')">专栏管理</el-menu-item>
             </el-submenu>
             <!-- <el-submenu index="1-3">
               <template slot="title">音乐收听</template>

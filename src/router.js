@@ -4,8 +4,8 @@ import NotFound from '@/component/NotFound.vue' //404 Not Found
 import Home from '@/component/Home.vue' // Home
 import Login from '@/component/Login.vue' //登录
 
-import PersonalWriteColumn from '@/component/personal/WriteColumn.vue'     //个人中心撰写专栏
-import PersonalColumnManager from '@/component/personal/ColumnManager.vue' // 个人中心专栏管理
+import ArticleWrite from '@/component/personal/ArticleWrite.vue'     //个人中心撰写专栏
+import ArticleManager from '@/component/personal/ArticleManager.vue' // 个人中心专栏管理
 
 import DBFileManager from '@/component/data/center/DBFileManager.vue'   //文件管理
 import DBFileUploader from '@/component/data/center/DBFileUploader'     // 文件上传
@@ -27,12 +27,12 @@ const routes = [
     component: Login
   },
   {
-    path: '/personal/column/write',
-    component: PersonalWriteColumn
+    path: '/personal/article/write',
+    component: ArticleWrite
   },
   {
-    path: '/personal/column/manager',
-    component: PersonalColumnManager
+    path: '/personal/article/manager',
+    component: ArticleManager
   },
   {
     path:'/data/center/dbfile/manager',

@@ -116,8 +116,9 @@ export default {
             }
         },
         // 文件上传出错构造函数
-        handleError(err, file, fileList){
-            alert(err)
+        handleError(err){
+            var response = JSON.parse(err.message)
+            this.$message.error(response.message)
         },
         // 预览文件
         previewFile(file){
