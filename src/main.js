@@ -7,6 +7,10 @@ import store from './store.js'
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 
+// Markdown编辑器
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 import axios from 'axios'
 // 配置请求的跟路径
 axios.defaults.baseURL = 'http://localhost:8888/'
@@ -25,6 +29,7 @@ Vue.prototype.$http = axios
 Vue.config.productionTip = false
 
 Vue.use(ElementUI)
+Vue.use(mavonEditor)
 
 
 new Vue({
