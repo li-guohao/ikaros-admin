@@ -9,6 +9,8 @@
     <br>
     {{article}}
     <br>
+
+    <!-- 文章标题和分类 -->
     <div class="article-header">
       <el-input style="width:60%" v-model="article.title" placeholder="请输入专栏标题"></el-input>
       &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -25,17 +27,21 @@
         <el-button plain>草稿</el-button>
       </div>
     </div>
+    
+    <!-- 文章内容 -->
     <div class="article-content">
       <mavon-editor style="max-height:1500px;min-height:650px;" v-model="article.content" placeholder="请开始您的创作"/>
     </div>
-    <el-select v-model="article.tags" style="width:90%" multiple placeholder="请选择专栏标签">
+
+    <!-- 文章标签 -->
+    <!-- <el-select v-model="article.tags" style="width:90%" multiple placeholder="请选择专栏标签">
       <el-option
         v-for="(tag,index) in articleTags"
         :key="index"
         :label="tag"
         :value="tag">
       </el-option>
-    </el-select>
+    </el-select> -->
 
     <div class="article-sumbit">
       <el-button plain>发布</el-button>
