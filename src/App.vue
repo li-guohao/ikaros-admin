@@ -16,10 +16,10 @@
             </el-submenu>
             <el-submenu index="1-2">
               <template slot="title">知识专栏</template>
-              <el-menu-item index="1-2-1">提炼专栏</el-menu-item>
-              <el-menu-item index="1-2-2">专栏管理</el-menu-item>
+              <el-menu-item index="1-2-1" @click="toComponents('/personal/column/write')">撰写专栏</el-menu-item>
+              <el-menu-item index="1-2-2" @click="toComponents('/personal/column/manager')">专栏管理</el-menu-item>
             </el-submenu>
-            <el-submenu index="1-3">
+            <!-- <el-submenu index="1-3">
               <template slot="title">音乐收听</template>
               <el-menu-item index="1-3-1">添加歌曲</el-menu-item>
               <el-menu-item index="1-3-2">歌曲管理</el-menu-item>
@@ -30,7 +30,7 @@
               <template slot="title">视频生活</template>
               <el-menu-item index="1-4-1">发布视频</el-menu-item>
               <el-menu-item index="1-4-1">视频管理</el-menu-item>
-            </el-submenu>
+            </el-submenu> -->
           </el-submenu>
           <el-submenu index="2">
             <template slot="title"><i class="el-icon-folder-opened"></i>数据中心</template>
@@ -41,7 +41,7 @@
             </el-menu-item-group>
           </el-submenu>
 
-          <el-submenu index="3">
+          <!-- <el-submenu index="3">
             <template slot="title"><i class="el-icon-user-solid"></i>我的好友</template>
             <el-menu-item-group>
               <template slot="title">好友管理</template>
@@ -50,14 +50,14 @@
               <el-menu-item index="3-3">所有好友</el-menu-item>
               <el-menu-item index="3-3">好友权限</el-menu-item>
             </el-menu-item-group>
-          </el-submenu>
+          </el-submenu> -->
 
           <el-submenu index="4">
             <template slot="title"><i class="el-icon-setting"></i>系统设置</template>
             <el-menu-item-group>
               <template slot="title">个人中心</template>
               <el-menu-item index="4-1">个人资料</el-menu-item>
-              <el-menu-item index="4-2">账号绑定</el-menu-item>
+              <!-- <el-menu-item index="4-2">账号绑定</el-menu-item> -->
             </el-menu-item-group>
             <el-menu-item-group title="系统配置">
               <el-menu-item index="4-3" @click="toComponents('/system/option/config/manager')">配置管理</el-menu-item>
