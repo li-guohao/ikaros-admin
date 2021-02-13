@@ -83,7 +83,7 @@
         <el-table-column
             prop="description"
             label="描述"
-            width="180">
+            width="280">
         </el-table-column>
         <!-- 此配置项的对应值 -->
         <el-table-column
