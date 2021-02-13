@@ -76,7 +76,7 @@
         prop="originalName"
         label="文件名">
     </el-table-column>
-    <!-- 储存位置ss -->
+    <!-- 储存位置 -->
     <el-table-column
         prop="place"
         label="储存位置"
